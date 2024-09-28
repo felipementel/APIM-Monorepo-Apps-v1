@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "DEPLOY.BikeApp.Function": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7231",
+      "launchBrowser": false
+    }
+  }
+}

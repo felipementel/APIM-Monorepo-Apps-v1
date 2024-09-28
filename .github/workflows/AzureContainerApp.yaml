@@ -1,0 +1,41 @@
+name: Container App CI/CD
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on:
+  push:
+    branches:
+      - main
+    branches-ignore:
+      - 'feature/**'
+    paths:
+      - 'src/AzureContainerApp/**'
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+        type: choice
+        options:
+          - info
+          - warning
+          - debug
+  pull_request:
+    branches:
+      - main
+    branches-ignore:
+      - 'feature/**'
+    paths:
+      - 'src/AzureContainerApp/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet-version: ['7.0.x', '8.0.x']
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: false
+
+    steps:
+      - run: echo "Azure Container App - $GITHUB_WORKSPACE"

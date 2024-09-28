@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35312.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DEPLOY.BikeApp.Function", "DEPLOY.BikeApp.Function\DEPLOY.BikeApp.Function.csproj", "{529165EA-80DA-4F6A-84DF-E4B258CBF52F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{529165EA-80DA-4F6A-84DF-E4B258CBF52F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{529165EA-80DA-4F6A-84DF-E4B258CBF52F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{529165EA-80DA-4F6A-84DF-E4B258CBF52F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{529165EA-80DA-4F6A-84DF-E4B258CBF52F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FAA9528B-B9E8-4249-B296-0235A4B973C4}
+	EndGlobalSection
+EndGlobal
