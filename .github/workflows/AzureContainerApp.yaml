@@ -37,3 +37,13 @@ jobs:
 
     steps:
       - run: echo "Azure Container App - $GITHUB_WORKSPACE"
+      
+      - uses: actions/checkout@v4
+      
+      - name: Setup dotnet ${{ matrix.dotnet-version }}
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+          
+      - name: Display dotnet version
+        run: dotnet --version
