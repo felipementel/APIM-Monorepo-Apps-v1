@@ -1,0 +1,40 @@
+@DEPLOY.CarApp.API_HostAddress = https://localhost:7200/api
+@CarId = e96747c7-84db-4ee4-8069-32846d400cad
+
+GET {{DEPLOY.CarApp.API_HostAddress}}/cars
+Accept: application/json
+
+###
+
+POST {{DEPLOY.CarApp.API_HostAddress}}/cars
+Content-Type: application/json
+
+{
+  "make": "Toyota",
+  "model": "Corolla",
+  "year": 2022
+}
+
+###
+
+GET {{DEPLOY.CarApp.API_HostAddress}}/cars/{{CarId}}
+Accept: application/json
+
+###
+
+PUT {{DEPLOY.CarApp.API_HostAddress}}/cars/{{CarId}}
+Content-Type: application/json
+
+{
+  "id": "{{CarId}}",
+  "make": "Honda",
+  "model": "Civic",
+  "year": 2023
+}
+
+###
+
+DELETE {{DEPLOY.CarApp.API_HostAddress}}/cars/{{CarId}}
+Accept: application/json
+
+###

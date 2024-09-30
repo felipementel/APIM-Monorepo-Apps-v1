@@ -27,12 +27,7 @@ namespace DEPLOY.FoodApp.API
 
             app.UseAuthorization();
 
-            var summaries = new[]
-            {
-                "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-            };
-
-            app.MapGet("/weatherforecast", (HttpContext httpContext) =>
+            app.MapGet("/food", (HttpContext httpContext) =>
             {
                 var forecast = Enumerable.Range(1, 5).Select(index =>
                     new WeatherForecast
@@ -44,7 +39,7 @@ namespace DEPLOY.FoodApp.API
                     .ToArray();
                 return forecast;
             })
-            .WithName("GetWeatherForecast")
+            .WithName("food")
             .WithOpenApi();
 
             app.Run();
