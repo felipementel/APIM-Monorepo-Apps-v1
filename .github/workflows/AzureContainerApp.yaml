@@ -71,10 +71,10 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker buildx build -f ./src/AzureContainerApp/DEPLOY.CarApp.API/Dockerfile -t ${{ github.actor }}/$imageName:${{ steps.get-version.outputs.tag }} ./src/AzureContainerApp
-          docker tag ${{ github.actor }}/$imageName:${{ steps.get-version.outputs.tag }} ${{ github.actor }}/$imageName:latest
-          docker push ${{ github.actor }}/$imageName:${{ steps.get-version.outputs.tag }}
-          docker push ${{ github.actor }}/$imageName:latest
+          docker buildx build -f ./src/AzureContainerApp/DEPLOY.CarApp.API/Dockerfile -t ${{ github.actor }}/${{ env.imageName }}:${{ steps.get-version.outputs.tag }} ./src/AzureContainerApp
+          docker tag ${{ github.actor }}/${{ env.imageName }}:${{ steps.get-version.outputs.tag }} ${{ github.actor }}/${{ env.imageName }}:latest
+          docker push ${{ github.actor }}/${{ env.imageName }}:${{ steps.get-version.outputs.tag }}
+          docker push ${{ github.actor }}/${{ env.imageName }}:latest
 
   deploy:
     if: ${{ github.event_name != 'pull_request' }}
@@ -90,9 +90,9 @@ jobs:
       - name: Deploy to Azure Container App
         uses: azure/container-apps-deploy-action@v1
         with:
-          # appSourcePath: ${{ github.workspace }}/src/AzureContainerApp
+          appSourcePath: ${{ github.workspace }}/src/AzureContainerApp/
           containerAppName: ca-apim-carapp-lab
           registryUrl: docker.io
-          imageToDeploy: ${{ github.actor }}/$imageName:${{ steps.get-version.outputs.tag }}
+          imageToDeploy: ${{ github.actor }}/${{ env.imageName }}:${{ steps.get-version.outputs.tag }}
           resourceGroup: rg-apim-canal-deploy-apps-lab
           location: brazilsouth
