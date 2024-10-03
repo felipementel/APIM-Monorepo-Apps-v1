@@ -90,9 +90,9 @@ jobs:
       - name: Deploy to Azure Container App
         uses: azure/container-apps-deploy-action@v1
         with:
-          appSourcePath: ${{ github.workspace }}/src/AzureContainerApp/
+          # appSourcePath: ${{ github.workspace }}/src/AzureContainerApp/
           containerAppName: ca-apim-carapp-lab
           registryUrl: docker.io
-          imageToDeploy: ${{ github.actor }}/apim-carapp:latest
+          imageToDeploy: felipementel/apim-carapp:latest
           resourceGroup: rg-apim-canal-deploy-apps-lab
           location: brazilsouth
