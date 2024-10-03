@@ -96,3 +96,5 @@ jobs:
           imageToDeploy: felipementel/apim-carapp:latest
           resourceGroup: rg-apim-canal-deploy-apps-lab
           location: brazilsouth
+          env: |
+            ASPNETCORE_ENVIRONMENT=Development
