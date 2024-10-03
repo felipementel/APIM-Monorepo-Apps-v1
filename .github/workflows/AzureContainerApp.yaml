@@ -93,6 +93,6 @@ jobs:
           appSourcePath: ${{ github.workspace }}/src/AzureContainerApp/
           containerAppName: ca-apim-carapp-lab
           registryUrl: docker.io
-          imageToDeploy: ${{ github.actor }}/${{ env.imageName }}:${{ steps.get-version.outputs.tag }}
+          imageToDeploy: ${{ github.actor }}/apim-carapp:latest
           resourceGroup: rg-apim-canal-deploy-apps-lab
           location: brazilsouth
