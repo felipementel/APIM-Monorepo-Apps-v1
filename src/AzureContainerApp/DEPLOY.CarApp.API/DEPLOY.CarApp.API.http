@@ -38,3 +38,6 @@ DELETE {{DEPLOY.CarApp.API_HostAddress}}/cars/{{CarId}}
 Accept: application/json
 
 ###
+
+GET {{DEPLOY.CarApp.API_HostAddress}}/carsBugs/time/1
+Accept: application/json

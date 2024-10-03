@@ -1,5 +1,6 @@
 name: Container App CI/CD
 run-name: ${{ github.actor }} is testing out Azure Container Apps GitHub Actions 🚀
+
 on:
   push:
     branches:
@@ -25,6 +26,9 @@ on:
     paths:
       - 'src/AzureContainerApp/**'
 
+env:
+  imageName: apim-carapp
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -37,13 +41,53 @@ jobs:
 
     steps:
       - run: echo "Azure Container App - $GITHUB_WORKSPACE"
-      
+
       - uses: actions/checkout@v4
-      
+
       - name: Setup dotnet ${{ matrix.dotnet-version }}
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
-          
+
       - name: Display dotnet version
         run: dotnet --version
+
+      - name: Install dependencies
+        run: dotnet restore src/AzureContainerApp/DEPLOY.CarApp.API/DEPLOY.CarApp.API.csproj
+
+      - name: Build and push Docker image
+        uses: docker/login-action@v3.3.0
+        with:
+          login-server: docker.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Get-Version from csproj
+        id: get-version
+        shell: bash
+        run: |
+          version=$(sed -n 's/.*<Version>\(.*\)<\/Version>.*/\1/p' ./src/DEPLOY.Cachorro.Api/DEPLOY.Cachorro.Api.csproj)
+          echo "tag=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Build and push Docker image
+        run: |
+          docker buildx build -f ../../src/AzureContainerApp/DEPLOY.CarApp.API/Dockerfile -t ${{ github.actor }}/$imageName:${{ steps.get-version.outputs.tag }} ../../src/AzureContainerApp
+          docker tag ${{ github.actor }}/$imageName:${{ steps.get-version.outputs.tag }} ${{ github.actor }}/$imageName:latest
+          docker push ${{ github.actor }}/$imageName:${{ steps.get-version.outputs.tag }}
+          docker push ${{ github.actor }}/$imageName:latest
+
+  deploy:
+    if: ${{ github.event_name != 'pull_request' }}
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Deploy to Azure Container App
+        uses: azure/container-apps-deploy-action@v1
+        with:
+          appSourcePath: ${{ github.workspace }}/src/AzureContainerApp
+          appName: ca-apim-carapp-lab
+          registryUrl: docker.io
+          imageToDeploy: ${{ github.actor }}/$imageName:${{ steps.get-version.outputs.tag }}
+          resourceGroup: rg-apim-canal-deploy-apps-lab
+          location: brazilsouth
