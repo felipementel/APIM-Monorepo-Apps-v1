@@ -66,7 +66,7 @@ jobs:
         id: get-version
         shell: bash
         run: |
-          version=$(sed -n 's/.*<Version>\(.*\)<\/Version>.*/\1/p' ./src/DEPLOY.Cachorro.Api/DEPLOY.Cachorro.Api.csproj)
+          version=$(sed -n 's/.*<Version>\(.*\)<\/Version>.*/\1/p' ./src/AzureContainerApp/DEPLOY.CarApp.API/DEPLOY.CarApp.API.csproj)
           echo "tag=$version" >> "$GITHUB_OUTPUT"
 
       - name: Build and push Docker image
