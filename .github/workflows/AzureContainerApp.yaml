@@ -7,7 +7,7 @@ on:
       - main
       - '!feature/**'
     paths:
-      - './src/AzureContainerApp/**'
+      - '../src/AzureContainerApp/**'
   workflow_dispatch:
     inputs:
       logLevel:
