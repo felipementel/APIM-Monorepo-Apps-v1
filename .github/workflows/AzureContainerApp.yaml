@@ -98,5 +98,5 @@ jobs:
           resourceGroup: rg-apim-canal-deploy-apps-lab
           targetPort: 8080
           location: brazilsouth
-          env: |
+          environmentVariables: |
             ASPNETCORE_ENVIRONMENT=Development
