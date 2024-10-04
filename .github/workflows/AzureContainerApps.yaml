@@ -39,6 +39,9 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: false
 
+    outputs:
+      imageTag: ${{ steps.get-version.outputs.tag }}
+
     steps:
       - uses: actions/checkout@v4
 
@@ -92,7 +95,7 @@ jobs:
           containerAppName: ca-apim-carapp-lab
           containerAppEnvironment: cae-apim-canal-deploy-apps-lab
           registryUrl: docker.io
-          imageToDeploy: felipementel/${{ env.imageName }}:${{ needs.build.get-version.outputs.tag }}
+          imageToDeploy: felipementel/${{ env.imageName }}:${{ needs.build.outputs.imageTag }}
           resourceGroup: rg-apim-canal-deploy-apps-lab
           targetPort: 8080
           location: brazilsouth
