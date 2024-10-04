@@ -86,13 +86,13 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Deploy to Azure Container App
-        uses: azure/container-apps-deploy-action@v1
+        uses: azure/container-apps-deploy-action@v2
         with:
           # appSourcePath: ${{ github.workspace }}/src/AzureContainerApps/
           containerAppName: ca-apim-carapp-lab
           containerAppEnvironment: cae-apim-canal-deploy-apps-lab
           registryUrl: docker.io
-          imageToDeploy: docker.io/felipementel/${{ env.imageName }}:${{ needs.build.outputs.get-version.outputs.tag }}
+          imageToDeploy: docker.io/felipementel/${{ env.imageName }}:${{ needs.build.get-version.outputs.tag }}
           resourceGroup: rg-apim-canal-deploy-apps-lab
           targetPort: 8080
           location: brazilsouth
