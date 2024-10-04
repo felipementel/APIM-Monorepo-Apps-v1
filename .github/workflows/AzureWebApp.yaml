@@ -1,5 +1,5 @@
-name: Wen App CI/CD
-run-name: ${{ github.actor }} is testing out Azure Web Apps GitHub Actions 🚀
+name: Web App CI/CD
+run-name: ${{ github.actor }} is testing out Azure Web App GitHub Actions 🚀
 
 on:
   push:
