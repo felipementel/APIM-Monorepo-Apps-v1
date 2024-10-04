@@ -8,12 +8,18 @@ https://www.youtube.com/watch?v=n6uTmKUHXyI&list=PLf7uDG4xdAJ0CzqQuYT69WzQnT5HoH
 
 ### az login (pre requisito)
 
+```
 https://github.com/Azure/login
+```
 
 ### Azure Container Apps
 
+```
 https://github.com/Azure/container-apps-deploy-action
+```
 
 ### Azure WebApp
 
+```
 https://github.com/Azure/webapps-deploy
+```
