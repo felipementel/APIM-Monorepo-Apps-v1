@@ -1,4 +1,4 @@
-name: Container App CI/CD
+name: Container Apps CI/CD
 run-name: ${{ github.actor }} is testing out Azure Container Apps GitHub Actions 🚀
 
 on:
