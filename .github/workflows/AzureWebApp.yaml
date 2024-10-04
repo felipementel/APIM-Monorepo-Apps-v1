@@ -93,4 +93,17 @@ jobs:
         with:
           app-name: app-apim-food-app-lab
           publish-profile: ${{ secrets.WEBAPP_PUBLISH_PROFILE }}
-          package: ${{ github.actor }}/${{ env.imageName }}:${{ needs.build.outputs.imageTag }}
+          images: ${{ github.actor }}/${{ env.imageName }}:${{ needs.build.outputs.imageTag }}
+
+      - name: Set Web App ACR authentication
+        uses: Azure/appservice-settings@v1
+        with:
+          app-name: 'node-rnc'
+          app-settings-json: |
+            [
+                {
+                    "name": "ASPNETCORE_ENVIRONMENT",
+                    "value": "Development",
+                    "slotSetting": false
+                }
+            ]
