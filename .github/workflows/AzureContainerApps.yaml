@@ -40,8 +40,6 @@ jobs:
       cancel-in-progress: false
 
     steps:
-      - run: echo "Azure Container App - $GITHUB_WORKSPACE"
-
       - uses: actions/checkout@v4
 
       - name: Setup dotnet ${{ matrix.dotnet-version }}
@@ -94,7 +92,7 @@ jobs:
           containerAppName: ca-apim-carapp-lab
           containerAppEnvironment: cae-apim-canal-deploy-apps-lab
           registryUrl: docker.io
-          imageToDeploy: felipementel/${{ env.imageName }}:${{ needs.build.steps.get-version.outputs.tag }}
+          imageToDeploy: felipementel/${{ env.imageName }}:${{ needs.build.outputs.get-version.outputs.tag }}
           resourceGroup: rg-apim-canal-deploy-apps-lab
           targetPort: 8080
           location: brazilsouth
