@@ -39,9 +39,10 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: false
 
-    steps:
-      - run: echo "Azure Web App - $GITHUB_WORKSPACE"
+    outputs:
+      imageTag: ${{ steps.get-version.outputs.tag }}
 
+    steps:
       - uses: actions/checkout@v4
 
       - name: Setup dotnet ${{ matrix.dotnet-version }}
@@ -87,10 +88,9 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      # - name: Deploy to Azure Web App
-      #   uses: azure/webapps-deploy@v2
-      #   with:
-      #     app-name: ${{ secrets.WEBAPP_NAME }}
-      #     slot-name: ${{ secrets.WEBAPP_SLOT_NAME }}
-      #     publish-profile: ${{ secrets.WEBAPP_PUBLISH_PROFILE }}
-      #     package: ${{ github.actor }}/${{ env.imageName }}:${{ steps.get-version.outputs.tag }}
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: app-apim-food-app-lab
+          publish-profile: ${{ secrets.WEBAPP_PUBLISH_PROFILE }}
+          package: ${{ github.actor }}/${{ env.imageName }}:${{ needs.build.outputs.imageTag }}
