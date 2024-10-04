@@ -92,7 +92,7 @@ jobs:
           containerAppName: ca-apim-carapp-lab
           containerAppEnvironment: cae-apim-canal-deploy-apps-lab
           registryUrl: docker.io
-          imageToDeploy: docker.io/felipementel/${{ env.imageName }}:${{ needs.build.get-version.outputs.tag }}
+          imageToDeploy: felipementel/${{ env.imageName }}:${{ needs.build.get-version.outputs.tag }}
           resourceGroup: rg-apim-canal-deploy-apps-lab
           targetPort: 8080
           location: brazilsouth
