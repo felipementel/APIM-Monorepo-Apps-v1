@@ -13,3 +13,7 @@ https://github.com/Azure/login
 ### Azure Container Apps
 
 https://github.com/Azure/container-apps-deploy-action
+
+### Azure WebApp
+
+https://github.com/Azure/webapps-deploy

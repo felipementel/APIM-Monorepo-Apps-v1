@@ -98,7 +98,7 @@ jobs:
       - name: Set Web App ACR authentication
         uses: Azure/appservice-settings@v1
         with:
-          app-name: 'node-rnc'
+          app-name: app-apim-food-app-lab
           app-settings-json: |
             [
                 {
