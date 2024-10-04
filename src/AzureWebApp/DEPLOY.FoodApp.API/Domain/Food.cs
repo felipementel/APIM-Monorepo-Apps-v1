@@ -7,12 +7,10 @@ namespace DEPLOY.FoodApp.API.Domain
         [JsonConstructor]
         public Food(
             Guid id,
-            string name,
             decimal price,
             FoodType type)
         {
             Id = id;
-            Name = name;
             Price = price;
             Type = type;
             CreatedAt = DateTime.Now;
@@ -25,7 +23,6 @@ namespace DEPLOY.FoodApp.API.Domain
             FoodType type)
         {
             Id = Guid.NewGuid();
-            Name = name;
             Price = price;
             Type = type;
             CreatedAt = DateTime.Now;
@@ -42,7 +39,7 @@ namespace DEPLOY.FoodApp.API.Domain
 
         public DateTime UpdatedAt { get; private set; }
 
-        public void Update(string make, string model, long year, bool sold)
+        public void Update(string model, long year, bool sold)
         {
             UpdatedAt = DateTime.Now;
         }

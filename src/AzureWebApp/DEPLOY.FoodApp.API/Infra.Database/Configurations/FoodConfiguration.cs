@@ -12,8 +12,6 @@ namespace DEPLOY.CarApp.API.Infra.Database.Configurations
 
             builder.Property(x => x.Id)
                 .ValueGeneratedOnAdd();
-
-
         }
     }
 }
