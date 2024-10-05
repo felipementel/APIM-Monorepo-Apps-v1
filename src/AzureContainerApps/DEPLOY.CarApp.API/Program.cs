@@ -36,7 +36,6 @@ namespace DEPLOY.CarApp.API
 
             app.UseAuthorization();
 
-
             app.MapControllers();
 
             app.Run();
