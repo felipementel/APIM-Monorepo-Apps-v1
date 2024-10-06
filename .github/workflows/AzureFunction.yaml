@@ -40,9 +40,6 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: false
 
-    outputs:
-      imageTag: ${{ steps.get-version.outputs.tag }}
-
     steps:
       - uses: actions/checkout@v4
 
