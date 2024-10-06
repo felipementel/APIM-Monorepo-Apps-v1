@@ -94,9 +94,10 @@ jobs:
           # appSourcePath: ${{ github.workspace }}/src/AzureContainerApps/
           containerAppName: ca-apim-car-app-lab
           containerAppEnvironment: cae-apim-canal-deploy-apps-lab
-          registryUrl: http://index.docker.io
+          registryUrl: felipementel.docker.io
           imageToDeploy: felipementel/${{ env.imageName }}:${{ needs.build.outputs.imageTag }}
           resourceGroup: rg-apim-canal-deploy-apps-lab
+
           targetPort: 8080
           location: brazilsouth
           environmentVariables: |
