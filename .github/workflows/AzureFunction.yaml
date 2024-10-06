@@ -99,13 +99,13 @@ jobs:
         with:
           app-name: 'func-apim-food-app-lab'
           slot-name: 'production'
-          publish-profile: ${{ secrets.WEBAPP_PUBLISH_PROFILE }}
+          publish-profile: ${{ secrets.FUNCTION_PUBLISH_PROFILE }}
           package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
 
       - name: Set Web App ACR authentication
         uses: Azure/appservice-settings@v1
         with:
-          app-name: app-apim-food-app-lab
+          app-name: app-apim-bike-app-lab
           app-settings-json: |
             [
                 {
