@@ -32,6 +32,7 @@ env:
 
 jobs:
   build:
+    environment: lab
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -56,6 +57,8 @@ jobs:
         run: |
           pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
           dotnet build --configuration Release --output ./output
+          cd ./${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output
+          ls
           popd
 
   deploy:

@@ -2,7 +2,28 @@
 
 ![APIM](./docs/img/capa.png)
 
+```
 https://www.youtube.com/watch?v=n6uTmKUHXyI&list=PLf7uDG4xdAJ0CzqQuYT69WzQnT5HoHAoU&ab_channel=DEPLOY
+```
+
+### Open API Specification
+
+```
+
+https://spec.openapis.org/oas/v3.0.3.html
+```
+
+### Swagger
+
+```
+https://github.com/swagger-api
+```
+
+### Scalar
+
+```
+https://github.com/scalar/scalar/?tab=readme-ov-file
+```
 
 ## Deploy
 
