@@ -28,7 +28,7 @@ on:
 
 env:
   imageName: apim-food-app
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'src/AzureFunction/DEPLOY.BikeApp.Function/DEPLOY.BikeApp.Function'
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'src/AzureFunction/DEPLOY.BikeApp.Function'
 
 jobs:
   build:
