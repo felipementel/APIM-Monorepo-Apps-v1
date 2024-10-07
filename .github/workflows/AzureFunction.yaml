@@ -87,7 +87,7 @@ jobs:
 
       - name: Extract zip
         run: |
-          unzip -o **/function-artifact.zip -d ./${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/function-extracted
+          unzip -o /home/runner/work/APIM-Monorepo-Apps-v1/APIM-Monorepo-Apps-v1/src/AzureFunction/function-artifact.zip -d ./${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/function-extracted
           rm -r *.zip
 
       - name: 'Run Azure Functions Action'
