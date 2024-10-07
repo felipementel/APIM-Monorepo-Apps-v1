@@ -52,5 +52,9 @@ https://github.com/Azure/webapps-deploy
 ### Azure Functions
 
 ```
+https://learn.microsoft.com/en-us/azure/azure-functions/run-functions-from-deployment-package
+```
+
+```
 https://learn.microsoft.com/en-us/azure/azure-functions/dotnet-isolated-in-process-differences
 ```

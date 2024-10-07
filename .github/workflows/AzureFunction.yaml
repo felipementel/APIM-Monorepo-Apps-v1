@@ -64,6 +64,9 @@ jobs:
         with:
           name: function-artifact
           path: './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
+          retention-days: 5
+          overwrite: true
+          compression-level: 9
 
   deploy:
     if: ${{ github.event_name != 'pull_request' }}
@@ -81,8 +84,13 @@ jobs:
         with:
           name: function-artifact
 
+      - name: Extract zip
+        run: |
+          unzip -o function-artifact.zip -d function-artifact
+          rm -r function-artifact.zip
+
       - name: 'Run Azure Functions Action'
-        uses: Azure/functions-action@v1
+        uses: Azure/functions-action@v1.5.2
         id: deploy-function-app
         with:
           app-name: 'func-apim-bike-app' # -lab
