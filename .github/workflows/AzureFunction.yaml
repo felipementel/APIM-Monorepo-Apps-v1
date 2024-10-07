@@ -83,11 +83,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: function-artifact
-          path: ./function-artifact.zip
+          path: ./${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/function-artifact.zip
 
       - name: Extract zip
         run: |
-          unzip -d function-artifact
+          unzip -o ./${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/function-artifact.zip -d ./${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/function-artifact
           rm -r *.zip
 
       - name: 'Run Azure Functions Action'
@@ -97,7 +97,7 @@ jobs:
           app-name: 'func-apim-bike-app' # -lab
           slot-name: 'production'
           publish-profile: ${{ secrets.FUNCTION_PUBLISH_PROFILE }}
-          package: './function-artifact'
+          package: ./${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/function-artifact
 
       - name: Configure Function Settings
         uses: Azure/appservice-settings@v1
