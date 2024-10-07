@@ -28,7 +28,7 @@ on:
 
 env:
   imageName: apim-food-app
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'src/AzureFunction/DEPLOY.BikeApp.Function'
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'src/AzureFunction/DEPLOY.BikeApp.Function/DEPLOY.BikeApp.Function'
 
 jobs:
   build:
@@ -57,7 +57,7 @@ jobs:
         run: |
           pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
           dotnet build --configuration Release --output ./output
-          cd ./${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output
+          pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
           ls
           popd
 
