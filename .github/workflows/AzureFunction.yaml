@@ -88,6 +88,7 @@ jobs:
       - name: Extract zip
         run: |
           ls
+          chmod u+x function-artifact.zip
           unzip function-artifact.zip
           cd function-artifact
           ls
