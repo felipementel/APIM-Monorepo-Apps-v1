@@ -87,8 +87,8 @@ jobs:
 
       - name: Extract zip
         run: |
-          unzip -o *.zip -d function-artifact
-          rm -r function-artifact.zip
+          unzip -d function-artifact
+          rm -r *.zip
 
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1.5.2
