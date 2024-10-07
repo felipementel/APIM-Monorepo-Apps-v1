@@ -85,7 +85,7 @@ jobs:
       - name: Configure Function Settings
         uses: Azure/appservice-settings@v1
         with:
-          app-name: app-apim-bike-app #-lab
+          app-name: func-apim-bike-app #-lab
           app-settings-json: |
             [
                 {
