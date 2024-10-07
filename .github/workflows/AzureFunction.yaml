@@ -83,6 +83,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: function-artifact
+          path: function-artifact.zip
 
       - name: Extract zip
         run: |
