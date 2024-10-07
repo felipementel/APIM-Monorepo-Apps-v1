@@ -28,10 +28,13 @@ namespace DEPLOY.CarApp.API
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwagger();
+                app.UseSwagger(options =>
+                {
+                    options.RouteTemplate = "openapi/{documentName}.json"; // Scalar
+                });
+
                 app.UseSwaggerUI(options =>
                 {
-                    options.RouteTemplate = "openapi/{documentName}.json"; //Scalar
                     options.DisplayRequestDuration();
                 });
 
