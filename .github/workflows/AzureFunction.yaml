@@ -80,7 +80,7 @@ jobs:
           app-name: 'func-apim-bike-app' # -lab
           slot-name: 'production'
           publish-profile: ${{ secrets.FUNCTION_PUBLISH_PROFILE }}
-          package: function-artifact.zip
+          package: './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
 
       - name: Configure Function Settings
         uses: Azure/appservice-settings@v1
