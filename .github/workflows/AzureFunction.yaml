@@ -28,20 +28,17 @@ on:
 
 env:
   imageName: apim-food-app
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'src/AzureFunction/DEPLOY.BikeApp.API'
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'src/AzureFunction/DEPLOY.BikeApp.Function'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dotnet-version: ['7.0.x', '8.0.x']
+        dotnet-version: ['8.0.x']
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: false
-
-    outputs:
-      imageTag: ${{ steps.get-version.outputs.tag }}
 
     steps:
       - uses: actions/checkout@v4
@@ -52,7 +49,7 @@ jobs:
           dotnet-version: ${{ matrix.dotnet-version }}
 
       - name: Install dependencies
-        run: dotnet restore src/AzureFunction/DEPLOY.BikeApp.API/DEPLOY.BikeApp.API.csproj
+        run: dotnet restore src/AzureFunction/DEPLOY.BikeApp.Function/DEPLOY.BikeApp.Function.csproj
 
       - name: 'Resolve Project Dependencies Using Dotnet'
         shell: bash
@@ -60,27 +57,6 @@ jobs:
           pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
           dotnet build --configuration Release --output ./output
           popd
-
-      - name: Build and push Docker image
-        uses: docker/login-action@v3.3.0
-        with:
-          registry: docker.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
-
-      - name: Get-Version from csproj
-        id: get-version
-        shell: bash
-        run: |
-          version=$(sed -n 's/.*<Version>\(.*\)<\/Version>.*/\1/p' ./src/AzureFunction/DEPLOY.BikeApp.API/DEPLOY.BikeApp.API.csproj)
-          echo "tag=$version" >> "$GITHUB_OUTPUT"
-
-      - name: Build and push Docker image
-        run: |
-          docker buildx build -f ./src/AzureFunction/DEPLOY.BikeApp.API/Dockerfile -t ${{ github.actor }}/${{ env.imageName }}:${{ steps.get-version.outputs.tag }} ./src/AzureFunction
-          docker tag ${{ github.actor }}/${{ env.imageName }}:${{ steps.get-version.outputs.tag }} ${{ github.actor }}/${{ env.imageName }}:latest
-          docker push ${{ github.actor }}/${{ env.imageName }}:${{ steps.get-version.outputs.tag }}
-          docker push ${{ github.actor }}/${{ env.imageName }}:latest
 
   deploy:
     if: ${{ github.event_name != 'pull_request' }}
