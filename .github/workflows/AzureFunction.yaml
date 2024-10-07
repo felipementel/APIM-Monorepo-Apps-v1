@@ -85,14 +85,6 @@ jobs:
           name: function-artifact
           path: function-artifact.zip
 
-      - name: Extract zip
-        run: |
-          ls
-          chmod u+x function-artifact.zip
-          unzip function-artifact.zip
-          cd function-artifact
-          ls
-
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1.5.2
         id: deploy-function-app
