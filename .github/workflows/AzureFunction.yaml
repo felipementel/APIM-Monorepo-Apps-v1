@@ -28,7 +28,7 @@ on:
 
 env:
   imageName: apim-food-app
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'src/AzureFunction/DEPLOY.BikeApp.Function/'
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'src/AzureFunction/'
 
 jobs:
   build:
@@ -55,10 +55,10 @@ jobs:
       - name: 'Resolve Project Dependencies Using Dotnet'
         shell: bash
         run: |
-          # pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
+          pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
           dotnet build --configuration Release --output ./output
-          # pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
-          # ls
+          pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
+          ls
           popd
 
   deploy:
