@@ -1,6 +1,7 @@
 
 using DEPLOY.CarApp.API.Infra.Database;
 using Microsoft.EntityFrameworkCore;
+using Scalar.AspNetCore;
 
 namespace DEPLOY.CarApp.API
 {
@@ -15,6 +16,8 @@ namespace DEPLOY.CarApp.API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.Configure<ScalarOptions>(options => options.Title = "Canal DEPLOY Scalar");
+
             builder.Services.AddDbContext<Context>(options =>
             {
                 options.UseInMemoryDatabase("CarApp");
@@ -28,8 +31,11 @@ namespace DEPLOY.CarApp.API
                 app.UseSwagger();
                 app.UseSwaggerUI(options =>
                 {
+                    options.RouteTemplate = "openapi/{documentName}.json"; //Scalar
                     options.DisplayRequestDuration();
                 });
+
+                app.MapScalarApiReference();
             }
 
             app.UseHttpsRedirection();
