@@ -79,7 +79,7 @@ jobs:
           publish-profile: ${{ secrets.FUNCTION_PUBLISH_PROFILE }}
           package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/DEPLOY.BikeApp.Function/output'
 
-      - name: Set Web App ACR authentication
+      - name: Configure Function Settings
         uses: Azure/appservice-settings@v1
         with:
           app-name: app-apim-bike-app #-lab
