@@ -77,7 +77,7 @@ jobs:
           app-name: 'func-apim-bike-app' # -lab
           slot-name: 'production'
           publish-profile: ${{ secrets.FUNCTION_PUBLISH_PROFILE }}
-          package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
+          package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/DEPLOY.BikeApp.Function/output'
 
       - name: Set Web App ACR authentication
         uses: Azure/appservice-settings@v1
