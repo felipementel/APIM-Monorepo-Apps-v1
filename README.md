@@ -27,6 +27,15 @@ https://github.com/scalar/scalar/?tab=readme-ov-file
 
 ## Deploy
 
+```
+
+https://github.com/actions/upload-artifact
+```
+
+```
+https://github.com/actions/download-artifact
+```
+
 ### az login (pre requisito)
 
 ```

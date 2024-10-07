@@ -83,11 +83,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: function-artifact
-          path: function-artifact.zip
+          path: .
 
       - name: Extract zip
         run: |
-          unzip -o function-artifact.zip -d function-artifact
+          unzip -o *.zip -d function-artifact
           rm -r function-artifact.zip
 
       - name: 'Run Azure Functions Action'
