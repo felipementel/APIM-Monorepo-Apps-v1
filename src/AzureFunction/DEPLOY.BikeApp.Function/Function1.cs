@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace DEPLOY.BikeApp.Function
 {
-    public class Function1
+    public static class Function1
     {
         private readonly ILogger<Function1> _logger;
 
