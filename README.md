@@ -48,6 +48,12 @@ https://github.com/Azure/login
 https://github.com/Azure/container-apps-deploy-action
 ```
 
+### Azure App Service
+
+```
+https://learn.microsoft.com/en-us/azure/app-service/reference-app-settings
+```
+
 ### Azure WebApp
 
 ```
@@ -66,4 +72,8 @@ https://learn.microsoft.com/en-us/azure/azure-functions/run-functions-from-deplo
 
 ```
 https://learn.microsoft.com/en-us/azure/azure-functions/dotnet-isolated-in-process-differences
+```
+
+```
+https://learn.microsoft.com/en-us/azure/azure-functions/function-keys-how-to
 ```
