@@ -108,3 +108,7 @@ jobs:
                     "slotSetting": false
                 }
             ]
+
+      - name: Log out from Azure
+        run: |
+          az logout

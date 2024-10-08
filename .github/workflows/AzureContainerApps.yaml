@@ -102,3 +102,7 @@ jobs:
           location: brazilsouth
           environmentVariables: |
             ASPNETCORE_ENVIRONMENT=Development
+
+      - name: Log out from Azure
+        run: |
+          az logout
