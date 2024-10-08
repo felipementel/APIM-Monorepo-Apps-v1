@@ -32,16 +32,15 @@ namespace DEPLOY.CarApp.API
 
                 app.UseSwaggerUI(options =>
                 {
-                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
                     options.DisplayRequestDuration();
                 });
 
-                app.UseSwagger(options =>
-                {
-                    options.RouteTemplate = "openapi/{documentName}.json"; // Scalar
-                });
+                // app.UseSwagger(options =>
+                // {
+                //     options.RouteTemplate = "openapi/{documentName}.json"; // Scalar
+                // });
 
-                app.MapScalarApiReference();
+                // app.MapScalarApiReference();
             }
 
             app.UseHttpsRedirection();
