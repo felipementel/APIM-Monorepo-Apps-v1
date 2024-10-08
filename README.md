@@ -67,6 +67,10 @@ https://github.com/Azure/webapps-deploy
 ### Azure Functions
 
 ```
+https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference?tabs=blob&pivots=programming-language-csharp
+```
+
+```
 https://learn.microsoft.com/en-us/azure/azure-functions/run-functions-from-deployment-package
 ```
 

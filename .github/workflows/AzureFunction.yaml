@@ -83,25 +83,28 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: function-artifact
-          path: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+          path: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/zip
 
-      - name: Extract zip
-        run: |
-          unzip -o ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }} -d ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/function-extracted
-          rm -r ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/function-artifact.zip
+      - name: Verificando o conteúdo do diretório
+        run: ls -la ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/zip
 
-      - name: 'Run Azure Functions Action'
-        uses: Azure/functions-action@v1.5.2
-        id: deploy-function-app
-        with:
-          app-name: 'func-apim-bike-app' # -lab
-          slot-name: 'production'
-          publish-profile: ${{ secrets.FUNCTION_PUBLISH_PROFILE }}
-          package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/function-extracted
+      # - name: Extract zip
+      #   run: |
+      #     unzip -o ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }} -d ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/function-extracted
+      #     rm -r ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/function-artifact.zip
 
-      - name: Log out from Azure
-        run: |
-          az logout
+      # - name: 'Run Azure Functions Action'
+      #   uses: Azure/functions-action@v1.5.2
+      #   id: deploy-function-app
+      #   with:
+      #     app-name: 'func-apim-bike-app' # -lab
+      #     slot-name: 'production'
+      #     publish-profile: ${{ secrets.FUNCTION_PUBLISH_PROFILE }}
+      #     package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/function-extracted
+
+      # - name: Log out from Azure
+      #   run: |
+      #     az logout
 
       ###
       # - name: Log in to Azure
