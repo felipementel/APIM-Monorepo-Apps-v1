@@ -35,12 +35,12 @@ namespace DEPLOY.CarApp.API
                     options.DisplayRequestDuration();
                 });
 
-                // app.UseSwagger(options =>
-                // {
-                //     options.RouteTemplate = "openapi/{documentName}.json"; // Scalar
-                // });
+                app.UseSwagger(options =>
+                {
+                    options.RouteTemplate = "openapi/{documentName}.json"; // Scalar
+                });
 
-                // app.MapScalarApiReference();
+                app.MapScalarApiReference();
             }
 
             app.UseHttpsRedirection();
