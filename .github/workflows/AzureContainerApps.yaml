@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dotnet-version: ['7.0.x', '8.0.x']
+        dotnet-version: ['8.0.x']
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: false
@@ -97,7 +97,6 @@ jobs:
           registryUrl: felipementel.docker.io
           imageToDeploy: felipementel/${{ env.imageName }}:${{ needs.build.outputs.imageTag }}
           resourceGroup: rg-apim-canal-deploy-apps-lab
-
           targetPort: 8080
           location: brazilsouth
           environmentVariables: |
