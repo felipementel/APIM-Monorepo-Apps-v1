@@ -19,7 +19,7 @@ namespace DEPLOY.BikeApp.Function
         {
             try
             {
-                log.LogInformation("C# HTTP trigger function processed a request.");
+                log.LogInformation("C# HTTP trigger - Canal DEPLOY");
 
                 string name = req.Query["name"];
 
