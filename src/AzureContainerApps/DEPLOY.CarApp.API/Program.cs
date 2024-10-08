@@ -32,6 +32,7 @@ namespace DEPLOY.CarApp.API
 
                 app.UseSwaggerUI(options =>
                 {
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
                     options.DisplayRequestDuration();
                 });
 
