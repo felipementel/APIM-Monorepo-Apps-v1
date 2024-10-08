@@ -83,12 +83,12 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: function-artifact
-          path: ${{ github.workspace }}/${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/function-artifact.zip
+          path: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
 
       - name: Extract zip
         run: |
-          unzip -o ${{ github.workspace }}/${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/function-artifact.zip -d ${{ github.workspace }}/${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/function-extracted
-          rm -r ${{ github.workspace }}/${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/function-artifact.zip
+          unzip -o ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/function-artifact.zip -d ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/function-extracted
+          rm -r ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/function-artifact.zip
 
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1.5.2
@@ -97,11 +97,12 @@ jobs:
           app-name: 'func-apim-bike-app' # -lab
           slot-name: 'production'
           publish-profile: ${{ secrets.FUNCTION_PUBLISH_PROFILE }}
-          package: ${{ github.workspace }}/${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/function-extracted
+          package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/function-extracted
+          
+        - name: Log out from Azure
+          run: |
+            az logout
 
-      - name: Log out from Azure
-        run: |
-          az logout
       ###
       # - name: Log in to Azure
       #   uses: azure/login@v2.2.0
