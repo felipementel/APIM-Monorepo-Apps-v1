@@ -27,7 +27,6 @@ on:
       - 'src/AzureFunction/**'
 
 env:
-  imageName: apim-food-app
   AZURE_FUNCTIONAPP_PACKAGE_PATH: 'src/AzureFunction'
 
 jobs:
@@ -90,14 +89,14 @@ jobs:
           ls
           ls -la ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output
 
-      # - name: 'Run Azure Functions Action'
-      #   uses: Azure/functions-action@v1.5.2
-      #   id: deploy-function-app
-      #   with:
-      #     app-name: 'func-apim-bike-app' # -lab
-      #     slot-name: 'production'
-      #     publish-profile: ${{ secrets.FUNCTION_PUBLISH_PROFILE }}
-      #     package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/function-artifact
+      - name: 'Run Azure Functions Action'
+        uses: Azure/functions-action@v1.5.2
+        id: deploy-function-app
+        with:
+          app-name: 'func-apim-bike-app' # -lab
+          slot-name: 'production'
+          publish-profile: ${{ secrets.FUNCTION_PUBLISH_PROFILE }}
+          package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output
 
       - name: Log out from Azure
         run: |
