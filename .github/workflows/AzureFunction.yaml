@@ -98,10 +98,10 @@ jobs:
           slot-name: 'production'
           publish-profile: ${{ secrets.FUNCTION_PUBLISH_PROFILE }}
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/function-extracted
-          
-        - name: Log out from Azure
-          run: |
-            az logout
+
+      - name: Log out from Azure
+        run: |
+          az logout
 
       ###
       # - name: Log in to Azure
