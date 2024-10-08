@@ -85,14 +85,19 @@ jobs:
           name: function-artifact
           path: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
 
-      - name: 'Run Azure Functions Action'
-        uses: Azure/functions-action@v1.5.2
-        id: deploy-function-app
-        with:
-          app-name: 'func-apim-bike-app' # -lab
-          slot-name: 'production'
-          publish-profile: ${{ secrets.FUNCTION_PUBLISH_PROFILE }}
-          package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/function-artifact
+      - name: Verificando o download do artefato
+        run: |
+          ls
+          ls -la ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output
+
+      # - name: 'Run Azure Functions Action'
+      #   uses: Azure/functions-action@v1.5.2
+      #   id: deploy-function-app
+      #   with:
+      #     app-name: 'func-apim-bike-app' # -lab
+      #     slot-name: 'production'
+      #     publish-profile: ${{ secrets.FUNCTION_PUBLISH_PROFILE }}
+      #     package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/function-artifact
 
       - name: Log out from Azure
         run: |
