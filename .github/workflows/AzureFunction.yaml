@@ -63,7 +63,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: function-artifact
-          path: './output'
+          path: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
           retention-days: 5
           overwrite: true
           compression-level: 9
@@ -83,7 +83,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: function-artifact
-          path: './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
+          path: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
 
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1.5.2
