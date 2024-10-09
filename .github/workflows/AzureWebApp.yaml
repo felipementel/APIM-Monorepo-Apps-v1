@@ -90,7 +90,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Deploy to Azure Web App
-        uses: azure/webapps-deploy@v3
+        uses: azure/webapps-deploy@v3.0.1
         with:
           app-name: app-apim-food-app-lab
           publish-profile: ${{ secrets.WEBAPP_PUBLISH_PROFILE }}
