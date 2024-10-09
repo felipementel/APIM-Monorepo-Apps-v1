@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dotnet-version: ['7.0.x', '8.0.x']
+        dotnet-version: ['8.0.x']
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: false
@@ -90,11 +90,11 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Deploy to Azure Web App
-        uses: azure/webapps-deploy@v3
+        uses: azure/webapps-deploy@v3.0.1
         with:
           app-name: app-apim-food-app-lab
           publish-profile: ${{ secrets.WEBAPP_PUBLISH_PROFILE }}
-          images: ${{ github.actor }}/${{ env.imageName }}:${{ needs.build.outputs.imageTag }}
+          images: docker.io/${{ github.actor }}/${{ env.imageName }}:${{ needs.build.outputs.imageTag }}
 
       - name: Set Web App ACR authentication
         uses: Azure/appservice-settings@v1
