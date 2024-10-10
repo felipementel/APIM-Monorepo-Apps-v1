@@ -31,7 +31,7 @@ env:
 
 jobs:
   build:
-    environment: lab
+#    environment: lab
     runs-on: ubuntu-latest
     strategy:
       matrix:
