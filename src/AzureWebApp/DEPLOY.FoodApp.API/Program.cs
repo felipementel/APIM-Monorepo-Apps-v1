@@ -4,6 +4,7 @@ using DEPLOY.FoodApp.API.Infra.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
+using System.Text.Json.Serialization;
 
 namespace DEPLOY.FoodApp.API
 {
@@ -14,6 +15,12 @@ namespace DEPLOY.FoodApp.API
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddAuthorization();
+
+            //configure to reiceive enum as string
+            builder.Services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -39,13 +46,13 @@ namespace DEPLOY.FoodApp.API
 
             app.UseAuthorization();
 
-            app.MapGet("/food", (Context context) =>
+            app.MapGet("/foods", (Context context) =>
             {
                 return Results.Ok(context.Foods.ToList());
             })
             .WithOpenApi();
 
-            app.MapPost("/food", (Context context, Food food) =>
+            app.MapPost("/foods", (Context context, Food food) =>
             {
                 context.Foods.Add(food);
                 context.SaveChanges();
@@ -95,7 +102,7 @@ namespace DEPLOY.FoodApp.API
 
 
 
-            app.MapGet("/food/{id}", (Context context, Guid id) =>
+            app.MapGet("/foods/{id}", (Context context, Guid id) =>
             {
                 var food = context.Foods.Find(id);
                 if (food == null)
@@ -106,7 +113,7 @@ namespace DEPLOY.FoodApp.API
             })
                 .WithOpenApi();
 
-            app.MapPut("/food/{id}", (Context context, Guid id, Food food) =>
+            app.MapPut("/foods/{id}", (Context context, Guid id, Food food) =>
             {
                 var existingFood = context.Foods.Find(id);
                 if (existingFood == null)
@@ -122,7 +129,7 @@ namespace DEPLOY.FoodApp.API
             })
                 .WithOpenApi();
 
-            app.MapDelete("/food/{id}", (Context context, Guid id) =>
+            app.MapDelete("/foods/{id}", (Context context, Guid id) =>
             {
                 var food = context.Foods.Find(id);
                 if (food == null)
@@ -134,6 +141,13 @@ namespace DEPLOY.FoodApp.API
                 return Results.NoContent();
             })
                 .WithOpenApi();
+
+            //
+            app.MapGet("/foods/bug", (Context context) =>
+            {
+                throw new Exception("This is a bug");
+            })
+          .WithOpenApi();
 
             app.Run();
         }
