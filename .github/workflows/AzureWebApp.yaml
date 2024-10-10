@@ -92,7 +92,7 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3.0.1
         with:
-          app-name: app-apim-food-app-lab2
+          app-name: app-apim-food-app-lab
           slot-name: production
           publish-profile: ${{ secrets.WEBAPP_PUBLISH_PROFILE }}
           images: docker.io/${{ github.actor }}/${{ env.imageName }}:${{ needs.build.outputs.imageTag }}
@@ -100,7 +100,7 @@ jobs:
       - name: Set Web App ACR authentication
         uses: Azure/appservice-settings@v1
         with:
-          app-name: app-apim-food-app-lab2
+          app-name: app-apim-food-app-lab
           app-settings-json: |
             [
                 {
