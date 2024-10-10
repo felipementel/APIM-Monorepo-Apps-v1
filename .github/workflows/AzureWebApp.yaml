@@ -93,6 +93,7 @@ jobs:
         uses: azure/webapps-deploy@v3.0.1
         with:
           app-name: app-apim-food-app-lab2
+          slot-name: production
           publish-profile: ${{ secrets.WEBAPP_PUBLISH_PROFILE }}
           images: docker.io/${{ github.actor }}/${{ env.imageName }}:${{ needs.build.outputs.imageTag }}
 
