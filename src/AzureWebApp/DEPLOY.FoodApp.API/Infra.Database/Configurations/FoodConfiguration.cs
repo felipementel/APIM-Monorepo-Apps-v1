@@ -12,6 +12,21 @@ namespace DEPLOY.CarApp.API.Infra.Database.Configurations
 
             builder.Property(x => x.Id)
                 .ValueGeneratedOnAdd();
+
+            builder.Property(x => x.Price)
+                .IsRequired();
+
+            builder
+                .Property(x => x.Type)  
+                .HasConversion(
+                    e => e.ToString(),
+                    e => (FoodType)Enum.Parse(typeof(FoodType), e));
+
+            builder.Property(x => x.CreatedAt)
+                .IsRequired();
+
+            builder.Property(x => x.UpdatedAt)
+                .IsRequired();
         }
     }
 }

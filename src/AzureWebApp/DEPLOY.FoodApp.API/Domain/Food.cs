@@ -18,7 +18,6 @@ namespace DEPLOY.FoodApp.API.Domain
         }
 
         public Food(
-            string name,
             decimal price,
             FoodType type)
         {

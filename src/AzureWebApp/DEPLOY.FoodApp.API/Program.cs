@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Http.Json;
 
 namespace DEPLOY.FoodApp.API
 {
@@ -17,9 +18,17 @@ namespace DEPLOY.FoodApp.API
             builder.Services.AddAuthorization();
 
             //configure to reiceive enum as string
-            builder.Services.AddControllers().AddJsonOptions(options =>
+            //builder.Services.AddControllers().AddJsonOptions(options =>
+            //{
+            //    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            //});
+            builder.Services.Configure<JsonOptions>(o => o.SerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+            builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(o => o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+
+            builder.Services.AddRouting(opt =>
             {
-                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                opt.LowercaseUrls = true;
+                opt.LowercaseQueryStrings = true;
             });
 
             builder.Services.AddEndpointsApiExplorer();
@@ -60,25 +69,36 @@ namespace DEPLOY.FoodApp.API
             })
                 .WithOpenApi(operation => new OpenApiOperation
                 {
-                    Summary = "Creates a Food item.",
-                    Description = @"
-                    <summary>
-                    Creates a Food item.
-                    </summary>
-                    <param name=""food"">The food item to create</param>
-                    <returns>A newly created Food item</returns>
-                    <remarks>
-                    Sample request:
-
-                        POST /food
-                        {
-                           ""price"": 2.35,
-                           ""type"": ""Pizza""
-                        }
-
-                    </remarks>
-                    <response code=""201"">Returns the newly created item</response>",
+                    Summary = "/food/{food.Id}",
+                    Description = "The food item to create",
                     Tags = new List<OpenApiTag> { new OpenApiTag { Name = "Food" } },
+                    RequestBody = new OpenApiRequestBody
+                    {
+                        Content = new Dictionary<string, OpenApiMediaType>
+                        {
+                            ["application/json"] = new OpenApiMediaType
+                            {
+                                Schema = new OpenApiSchema
+                                {
+                                    Type = "object",
+                                    Properties = new Dictionary<string, OpenApiSchema>
+                                    {
+                                        ["price"] = new OpenApiSchema
+                                        {
+                                            Type = "number",
+                                            Format = "float",
+                                            Example = new OpenApiFloat(2.35F)
+                                        },
+                                        ["type"] = new OpenApiSchema
+                                        {
+                                            Type = "string",
+                                            Example = new OpenApiString("Pizza")
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
                     Responses = new OpenApiResponses
                     {
                         ["201"] = new OpenApiResponse
@@ -99,7 +119,6 @@ namespace DEPLOY.FoodApp.API
                         }
                     }
                 });
-
 
 
             app.MapGet("/foods/{id}", (Context context, Guid id) =>
