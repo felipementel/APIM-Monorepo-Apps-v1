@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using Swashbuckle.AspNetCore.Annotations;
+using System.Text.Json.Serialization;
 
 namespace DEPLOY.CarApp.API.Domain
 {
@@ -27,6 +28,7 @@ namespace DEPLOY.CarApp.API.Domain
             UpdatedAt = DateTime.Now;
         }
 
+        [SwaggerSchema(ReadOnly = true)]
         public Guid Id { get; init; }
 
         public string Make { get; init; }
@@ -37,6 +39,7 @@ namespace DEPLOY.CarApp.API.Domain
 
         public bool Sold { get; private set; }
 
+        [SwaggerSchema(ReadOnly = true)]
         public DateTime CreatedAt { get; init; }
 
         public DateTime UpdatedAt { get; private set; }

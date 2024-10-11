@@ -14,7 +14,7 @@ namespace DEPLOY.BikeApp.Function
             _logger = logger;
         }
 
-        [Function("Function1")]
+        [Function("bike")]
         public IActionResult Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequest req)
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");

@@ -6,6 +6,31 @@
 https://www.youtube.com/watch?v=n6uTmKUHXyI&list=PLf7uDG4xdAJ0CzqQuYT69WzQnT5HoHAoU&ab_channel=DEPLOY
 ```
 
+# Criar um novo projeto
+
+```
+export subscriptionId=acd12345-6789-1011-1213-141516171819
+```
+
+```
+export appDisplayName=userCanalDEPLOY-APIM
+```
+
+```
+az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/$subscriptionId" --display-name $appDisplayName --sdk-auth
+```
+
+adaptar resposta para esse padrao
+
+```
+{
+  "appId": "1234",
+  "displayName": "userCanalDEPLOY-APIM",
+  "password": "abcd123",
+  "tenant": "5678"
+}
+```
+
 ### Open API Specification
 
 ```

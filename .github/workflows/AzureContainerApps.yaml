@@ -27,7 +27,12 @@ on:
       - 'src/AzureContainerApps/**'
 
 env:
-  imageName: apim-car-app
+  app_path: ./src/AzureContainerApps/DEPLOY.CarApp.API
+  app_root: ./src/AzureContainerApps
+  image_name: apim-car-api
+  resource_group: rg-apim-canal-deploy-apps-lab
+  app_name: ca-apim-car-app-lab
+  aca_env: cae-apim-canal-deploy-apps-lab
 
 jobs:
   build:
@@ -54,7 +59,7 @@ jobs:
         run: dotnet --version
 
       - name: Install dependencies
-        run: dotnet restore src/AzureContainerApps/DEPLOY.CarApp.API/DEPLOY.CarApp.API.csproj
+        run: dotnet restore ${{ env.app_path }}/**.csproj
 
       - name: Build and push Docker image
         uses: docker/login-action@v3.3.0
@@ -72,10 +77,10 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker buildx build -f ./src/AzureContainerApps/DEPLOY.CarApp.API/Dockerfile -t ${{ github.actor }}/${{ env.imageName }}:${{ steps.get-version.outputs.tag }} ./src/AzureContainerApps
-          docker tag ${{ github.actor }}/${{ env.imageName }}:${{ steps.get-version.outputs.tag }} ${{ github.actor }}/${{ env.imageName }}:latest
-          docker push ${{ github.actor }}/${{ env.imageName }}:${{ steps.get-version.outputs.tag }}
-          docker push ${{ github.actor }}/${{ env.imageName }}:latest
+          docker buildx build -f ${{ env.app_path }}/Dockerfile -t ${{ github.actor }}/${{ env.image_name }}:${{ steps.get-version.outputs.tag }} ${{ env.app_root }}
+          docker tag ${{ github.actor }}/${{ env.image_name }}:${{ steps.get-version.outputs.tag }} ${{ github.actor }}/${{ env.image_name }}:latest
+          docker push ${{ github.actor }}/${{ env.image_name }}:${{ steps.get-version.outputs.tag }}
+          docker push ${{ github.actor }}/${{ env.image_name }}:latest
 
   deploy:
     if: ${{ github.event_name != 'pull_request' }}
@@ -91,12 +96,11 @@ jobs:
       - name: Deploy to Azure Container App
         uses: azure/container-apps-deploy-action@v2
         with:
-          # appSourcePath: ${{ github.workspace }}/src/AzureContainerApps/
-          containerAppName: ca-apim-car-app-lab
-          containerAppEnvironment: cae-apim-canal-deploy-apps-lab
+          containerAppName: ${{ env.app_name }}
+          containerAppEnvironment: ${{ env.aca_env }}
           registryUrl: docker.io
-          imageToDeploy: docker.io/felipementel/${{ env.imageName }}:${{ needs.build.outputs.imageTag }}
-          resourceGroup: rg-apim-canal-deploy-apps-lab
+          imageToDeploy: docker.io/${{ github.actor }}/${{ env.imageName }}:${{ needs.build.outputs.imageTag }}
+          resourceGroup: ${{ env.resourceGroup }}
           targetPort: 8080
           location: brazilsouth
           environmentVariables: |

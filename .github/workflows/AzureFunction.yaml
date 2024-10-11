@@ -28,10 +28,11 @@ on:
 
 env:
   AZURE_FUNCTIONAPP_PACKAGE_PATH: 'src/AzureFunction'
+  app_name: func-apim-bike-api-lab
 
 jobs:
   build:
-    environment: lab
+    # environment: lab
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -93,7 +94,7 @@ jobs:
         uses: Azure/functions-action@v1.5.2
         id: deploy-function-app
         with:
-          app-name: 'func-apim-bike-app' # -lab
+          app-name: ${{ env.APP_NAME }}
           slot-name: 'production'
           publish-profile: ${{ secrets.FUNCTION_PUBLISH_PROFILE }}
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output

@@ -32,7 +32,10 @@ namespace DEPLOY.FoodApp.API
             });
 
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.EnableAnnotations();
+            });
 
             builder.Services.AddDbContext<Context>(options =>
             {

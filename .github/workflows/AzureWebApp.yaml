@@ -27,11 +27,15 @@ on:
       - 'src/AzureWebApp/**'
 
 env:
-  imageName: apim-food-app
+  app_path: ./src/AzureWebApp/DEPLOY.FoodApp.API
+  app_root: ./src/AzureWebApp
+  image_name: apim-food-api
+  resource_group: rg-apim-canal-deploy-apps-lab
+  app_name: app-apim-food-app-lab
 
 jobs:
   build:
-#    environment: lab
+    #    environment: lab
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -55,7 +59,7 @@ jobs:
         run: dotnet --version
 
       - name: Install dependencies
-        run: dotnet restore src/AzureWebApp/DEPLOY.FoodApp.API/DEPLOY.FoodApp.API.csproj
+        run: dotnet restore ${{ env.app_path }}/*.csproj
 
       - name: Build and push Docker image
         uses: docker/login-action@v3.3.0
@@ -68,15 +72,15 @@ jobs:
         id: get-version
         shell: bash
         run: |
-          version=$(sed -n 's/.*<Version>\(.*\)<\/Version>.*/\1/p' ./src/AzureWebApp/DEPLOY.FoodApp.API/DEPLOY.FoodApp.API.csproj)
+          version=$(sed -n 's/.*<Version>\(.*\)<\/Version>.*/\1/p' ${{ env.app_path }}/*.csproj)
           echo "tag=$version" >> "$GITHUB_OUTPUT"
 
       - name: Build and push Docker image
         run: |
-          docker buildx build -f ./src/AzureWebApp/DEPLOY.FoodApp.API/Dockerfile -t ${{ github.actor }}/${{ env.imageName }}:${{ steps.get-version.outputs.tag }} ./src/AzureWebApp
-          docker tag ${{ github.actor }}/${{ env.imageName }}:${{ steps.get-version.outputs.tag }} ${{ github.actor }}/${{ env.imageName }}:latest
-          docker push ${{ github.actor }}/${{ env.imageName }}:${{ steps.get-version.outputs.tag }}
-          docker push ${{ github.actor }}/${{ env.imageName }}:latest
+          docker buildx build -f ${{ env.app_path }}/Dockerfile -t ${{ github.actor }}/${{ env.image_name }}:${{ steps.get-version.outputs.tag }} ${{ env.app_root }}
+          docker tag ${{ github.actor }}/${{ env.image_name }}:${{ steps.get-version.outputs.tag }} ${{ github.actor }}/${{ env.image_name }}:latest
+          docker push ${{ github.actor }}/${{ env.image_name }}:${{ steps.get-version.outputs.tag }}
+          docker push ${{ github.actor }}/${{ env.image_name }}:latest
 
   deploy:
     if: ${{ github.event_name != 'pull_request' }}
@@ -92,15 +96,15 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3.0.1
         with:
-          app-name: app-apim-food-app-lab
+          app-name: ${{ env.app_name }}
           slot-name: production
           publish-profile: ${{ secrets.WEBAPP_PUBLISH_PROFILE }}
-          images: docker.io/${{ github.actor }}/${{ env.imageName }}:${{ needs.build.outputs.imageTag }}
+          images: docker.io/${{ github.actor }}/${{ env.image_name }}:${{ needs.build.outputs.imageTag }}
 
       - name: Set Web App ACR authentication
         uses: Azure/appservice-settings@v1
         with:
-          app-name: app-apim-food-app-lab
+          app-name:
           app-settings-json: |
             [
                 {

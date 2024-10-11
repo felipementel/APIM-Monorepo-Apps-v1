@@ -1,3 +1,4 @@
+using Swashbuckle.AspNetCore.Annotations;
 using System.Text.Json.Serialization;
 
 namespace DEPLOY.FoodApp.API.Domain
@@ -28,12 +29,14 @@ namespace DEPLOY.FoodApp.API.Domain
             UpdatedAt = DateTime.Now;
         }
 
+        [SwaggerSchema(ReadOnly = true)]
         public Guid Id { get; init; }
 
         public decimal Price { get; init; }
 
         public FoodType Type { get; init; }
 
+        [SwaggerSchema(ReadOnly = true)]
         public DateTime CreatedAt { get; init; }
 
         public DateTime UpdatedAt { get; private set; }

@@ -12,9 +12,18 @@ namespace DEPLOY.CarApp.API
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+            builder.Services.AddRouting(opt =>
+            {
+                opt.LowercaseUrls = true;
+                opt.LowercaseQueryStrings = true;
+            });
+
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.EnableAnnotations();
+            });
 
             builder.Services.Configure<ScalarOptions>(options => options.Title = "Canal DEPLOY Scalar");
 
