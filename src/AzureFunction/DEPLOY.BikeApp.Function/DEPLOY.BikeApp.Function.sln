@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DEPLOY.BikeApp.Function", "DEPLOY.BikeApp.Function.csproj", "{F3EF6595-436C-47B9-A78F-072847C2367D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "obj", "obj", "{626482D2-E3D6-4722-8EFE-E5EF551CF460}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Debug", "Debug", "{E5201236-B796-4543-B9A6-ED508DF95BC6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net8.0", "net8.0", "{E757C012-348B-4BAA-83B2-938C681E46AF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkerExtensions", "obj\Debug\net8.0\WorkerExtensions\WorkerExtensions.csproj", "{DA404E49-8E63-496A-94DD-F8C608AE0059}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F3EF6595-436C-47B9-A78F-072847C2367D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3EF6595-436C-47B9-A78F-072847C2367D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3EF6595-436C-47B9-A78F-072847C2367D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3EF6595-436C-47B9-A78F-072847C2367D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA404E49-8E63-496A-94DD-F8C608AE0059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA404E49-8E63-496A-94DD-F8C608AE0059}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA404E49-8E63-496A-94DD-F8C608AE0059}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA404E49-8E63-496A-94DD-F8C608AE0059}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E5201236-B796-4543-B9A6-ED508DF95BC6} = {626482D2-E3D6-4722-8EFE-E5EF551CF460}
+		{E757C012-348B-4BAA-83B2-938C681E46AF} = {E5201236-B796-4543-B9A6-ED508DF95BC6}
+		{DA404E49-8E63-496A-94DD-F8C608AE0059} = {E757C012-348B-4BAA-83B2-938C681E46AF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EAF0EE8B-748F-43A9-BC0E-143F70508392}
+	EndGlobalSection
+EndGlobal

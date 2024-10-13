@@ -5,16 +5,16 @@ using Microsoft.Extensions.Logging;
 
 namespace DEPLOY.BikeApp.Function
 {
-    public class Function1
+    public class Bikes
     {
-        private readonly ILogger<Function1> _logger;
+        private readonly ILogger<Bikes> _logger;
 
-        public Function1(ILogger<Function1> logger)
+        public Bikes(ILogger<Bikes> logger)
         {
             _logger = logger;
         }
 
-        [Function("bike")]
+        [Function("bikes")]
         public IActionResult Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequest req)
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
