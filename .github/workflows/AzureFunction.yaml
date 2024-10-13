@@ -28,7 +28,7 @@ on:
 
 env:
   app_full_path: ./src/AzureFunction/DEPLOY.BikeApp.Function/DEPLOY.BikeApp.Function.csproj
-  app_path: ./src/AzureFunction/DEPLOY.BikeApp.Function/
+  app_path: ./src/AzureFunction/DEPLOY.BikeApp.Function
   app_root: ./src/AzureFunction/
   app_name: func-apim-bike-api-lab
 
@@ -53,8 +53,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          dotnet restore ${{ env.app_path }}/*.csproj
-          dotnet build --project ${{ env.app_path }}/*.csproj --configuration Release --output ./output
+          dotnet restore ${{ env.app_full_path }}
+          dotnet build --project ${{ env.app_full_path }} --configuration Release --output ./output
 
 #      - name: 'Build'
 #        shell: bash
