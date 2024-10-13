@@ -27,7 +27,8 @@ on:
       - 'src/AzureFunction/**'
 
 env:
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'src/AzureFunction'
+  app_path: ./src/AzureFunction/DEPLOY.BikeApp.Function
+  app_root: ./src/AzureFunction
   app_name: func-apim-bike-api-lab
 
 jobs:
@@ -50,12 +51,12 @@ jobs:
           dotnet-version: ${{ matrix.dotnet-version }}
 
       - name: Install dependencies
-        run: dotnet restore src/AzureFunction/DEPLOY.BikeApp.Function/DEPLOY.BikeApp.Function.csproj
+        run: dotnet restore ${ env.app_path}}/*.csproj
 
       - name: 'Resolve Project Dependencies Using Dotnet'
         shell: bash
         run: |
-          pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
+          pushd ${ env.app_path}}
           dotnet build --configuration Release --output ./output
           popd
 
@@ -63,7 +64,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: function-artifact
-          path: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
+          path: ${ env.app_path}}/output'
           retention-days: 5
           overwrite: true
           compression-level: 9
@@ -83,12 +84,12 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: function-artifact
-          path: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
+          path: ${ env.app_path}}/output
 
       - name: Verificando o download do artefato
         run: |
           ls
-          ls -la ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output
+          ls -la ${ env.app_path}}/output
 
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1.5.2
@@ -97,7 +98,7 @@ jobs:
           app-name: ${{ env.app_name }}
           slot-name: 'production'
           publish-profile: ${{ secrets.FUNCTION_PUBLISH_PROFILE }}
-          package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output
+          package: ${ env.app_path}}/output
 
       - name: Log out from Azure
         run: |
