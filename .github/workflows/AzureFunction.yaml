@@ -27,8 +27,8 @@ on:
       - 'src/AzureFunction/**'
 
 env:
-  app_path: ./src/AzureFunction/DEPLOY.BikeApp.Function
-  app_root: ./src/AzureFunction
+  app_path: ./src/AzureFunction/DEPLOY.BikeApp.Function/
+  app_root: ./src/AzureFunction/
   app_name: func-apim-bike-api-lab
 
 jobs:
