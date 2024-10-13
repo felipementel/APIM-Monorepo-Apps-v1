@@ -53,10 +53,10 @@ jobs:
       - name: Install dependencies
         run: dotnet restore ${{ env.app_path }}/*.csproj
 
-      - name: 'Resolve Project Dependencies Using Dotnet'
+      - name: 'Build'
         shell: bash
         run: |
-          pushd ${{ env.app_path }}
+          pushd ${{ env.app_root }}
           dotnet build --configuration Release --output ./output
           popd
 
