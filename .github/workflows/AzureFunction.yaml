@@ -56,7 +56,7 @@ jobs:
       - name: 'Build'
         shell: bash
         run: |
-          pushd ${{ env.app_root }}
+          pushd ${{ env.app_path }}
           dotnet build --configuration Release --output ./output
           popd
 
