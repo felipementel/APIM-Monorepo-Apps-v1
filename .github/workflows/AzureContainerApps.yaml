@@ -99,8 +99,8 @@ jobs:
           containerAppName: ${{ env.app_name }}
           containerAppEnvironment: ${{ env.aca_env }}
           registryUrl: docker.io
-          imageToDeploy: docker.io/${{ github.actor }}/${{ env.imageName }}:${{ needs.build.outputs.imageTag }}
-          resourceGroup: ${{ env.resourceGroup }}
+          imageToDeploy: docker.io/${{ github.actor }}/${{ env.image_name }}:${{ needs.build.outputs.imageTag }}
+          resourceGroup: ${{ env.resource_group }}
           targetPort: 8080
           location: brazilsouth
           environmentVariables: |

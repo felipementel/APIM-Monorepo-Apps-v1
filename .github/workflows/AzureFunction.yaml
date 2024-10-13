@@ -94,7 +94,7 @@ jobs:
         uses: Azure/functions-action@v1.5.2
         id: deploy-function-app
         with:
-          app-name: ${{ env.APP_NAME }}
+          app-name: ${{ env.app_name }}
           slot-name: 'production'
           publish-profile: ${{ secrets.FUNCTION_PUBLISH_PROFILE }}
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output
