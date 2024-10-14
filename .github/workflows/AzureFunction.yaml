@@ -68,37 +68,15 @@ jobs:
           publish-profile: ${{ secrets.FUNCTION_PUBLISH_PROFILE }}
           package: ${{ env.app_path }}/output3
 
-      - name: 'Publish Artifact for Azure Functions'
-        uses: actions/upload-artifact@v4
-        with:
-          name: function-artifact
-          path: ${{ env.app_path }}/output3
-          retention-days: 5
-          overwrite: true
-          compression-level: 9
-          if-no-files-found: error
-
-      #      - name: 'Build'
-      #        shell: bash
-      #        run: |
-      #          pushd ${{ env.app_path }}
-      #          dotnet build --configuration Release --output ./output
-      #          popd
-      ##
-      # - name: Zip files
-      #   run: |
-      #     cd ${{ env.app_path }}/output
-      #     zip -r ${{ env.app_name }}.zip .
-
-  #     - name: 'Publish Artifact for Azure Functions'
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: function-artifact
-  #         path: ${{ env.app_path }}/output
-  #         retention-days: 5
-  #         overwrite: true
-  #         compression-level: 9
-  #         if-no-files-found: error
+      # - name: 'Publish Artifact for Azure Functions'
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: function-artifact
+      #     path: ${{ env.app_path }}/output3
+      #     retention-days: 5
+      #     overwrite: true
+      #     compression-level: 9
+      #     if-no-files-found: error
 
   deploy:
     if: ${{ github.event_name != 'pull_request' }}
@@ -122,15 +100,15 @@ jobs:
           ls
           ls -la ./output
 
-  #     - name: 'Run Azure Functions Action'
-  #       uses: Azure/functions-action@v1.5.2
-  #       id: deploy-function-app
-  #       with:
-  #         app-name: ${{ env.app_name }}
-  #         slot-name: 'production'
-  #         publish-profile: ${{ secrets.FUNCTION_PUBLISH_PROFILE }}
-  #         package: ./output
+      - name: 'Run Azure Functions Action'
+        uses: Azure/functions-action@v1.5.2
+        id: deploy-function-app
+        with:
+          app-name: ${{ env.app_name }}
+          slot-name: 'production'
+          publish-profile: ${{ secrets.FUNCTION_PUBLISH_PROFILE }}
+          package: ./output
 
-  #     - name: Log out from Azure
-  #       run: |
-  #         az logout
+      - name: Log out from Azure
+        run: |
+          az logout
