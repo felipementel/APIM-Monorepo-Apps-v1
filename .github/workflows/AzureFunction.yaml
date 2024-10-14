@@ -68,6 +68,16 @@ jobs:
           publish-profile: ${{ secrets.FUNCTION_PUBLISH_PROFILE }}
           package: ${{ env.app_path }}/output
 
+      - name: 'Publish Artifact for Azure Functions'
+        uses: actions/upload-artifact@v4
+        with:
+          name: function-artifact.zip
+          path: ${{ env.app_path }}/output/
+          retention-days: 5
+          overwrite: true
+          compression-level: 9
+          if-no-files-found: error
+
       #      - name: 'Build'
       #        shell: bash
       #        run: |
