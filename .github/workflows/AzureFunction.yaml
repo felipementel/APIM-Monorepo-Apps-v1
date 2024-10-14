@@ -94,7 +94,7 @@ jobs:
         with:
           name: function-artifact
           pattern: function-artifact*
-          path: download
+          path: download/artifacts
 
         #   unzip function-artifact.zip -d ./function-extracted
       - name: 'Run Azure Functions Action'
@@ -104,7 +104,7 @@ jobs:
           app-name: ${{ env.app_name }}
           slot-name: 'production'
           publish-profile: ${{ secrets.FUNCTION_PUBLISH_PROFILE }}
-          package: ./download/
+          package: download/artifacts
 
       - name: Log out from Azure
         run: |
