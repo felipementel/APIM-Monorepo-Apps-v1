@@ -114,7 +114,7 @@ jobs:
       - name: Download Artifact for Azure Functions
         uses: actions/download-artifact@v4
         with:
-          name: function-artifact
+          name: function-artifact.zip
           path: ./output
 
       - name: Verificando o download do artefato
