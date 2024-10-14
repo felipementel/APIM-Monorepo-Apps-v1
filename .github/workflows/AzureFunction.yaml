@@ -57,7 +57,7 @@ jobs:
 
       - name: Build
         run: |
-          dotnet build --project ${{ env.app_full_path }} --configuration Release --output ./output --no-incremental
+          dotnet build ${{ env.app_full_path }} --configuration Release --output ./output --no-incremental
 
       #      - name: 'Build'
       #        shell: bash
