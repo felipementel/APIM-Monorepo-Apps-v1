@@ -59,14 +59,14 @@ jobs:
         run: |
           dotnet build ${{ env.app_full_path }} --configuration Release --output ${{ env.app_path }}/output3 --no-incremental
 
-      - name: 'Run Azure Functions Action'
-        uses: Azure/functions-action@v1.5.2
-        id: deploy-function-app
-        with:
-          app-name: ${{ env.app_name }}
-          slot-name: 'production'
-          publish-profile: ${{ secrets.FUNCTION_PUBLISH_PROFILE }}
-          package: ${{ env.app_path }}/output3
+      # - name: 'Run Azure Functions Action'
+      #   uses: Azure/functions-action@v1.5.2
+      #   id: deploy-function-app
+      #   with:
+      #     app-name: ${{ env.app_name }}
+      #     slot-name: 'production'
+      #     publish-profile: ${{ secrets.FUNCTION_PUBLISH_PROFILE }}
+      #     package: ${{ env.app_path }}/output3
 
       - name: 'Publish Artifact for Azure Functions'
         uses: actions/upload-artifact@v4
@@ -95,10 +95,9 @@ jobs:
           name: function-artifact
           path: ./output
 
-      - name: Verificando o download do artefato
+      - name: Unzip
         run: |
-          ls
-          ls -la ./output
+          unzip ./output/function-artifact.zip -d ./output
 
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1.5.2
