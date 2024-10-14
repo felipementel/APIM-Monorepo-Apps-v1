@@ -98,7 +98,6 @@ jobs:
 
       - name: Unzip
         run: |
-          cd download
           ls -al
 
         #   unzip function-artifact.zip -d ./function-extracted
