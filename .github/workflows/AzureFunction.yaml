@@ -57,7 +57,7 @@ jobs:
 
       - name: Build
         run: |
-          dotnet build ${{ env.app_full_path }} --configuration Release --output ${{ env.app_path }}/output --no-incremental
+          dotnet build ${{ env.app_full_path }} --configuration Release --output ${{ env.app_path }}/output3 --no-incremental
 
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1.5.2
@@ -66,13 +66,13 @@ jobs:
           app-name: ${{ env.app_name }}
           slot-name: 'production'
           publish-profile: ${{ secrets.FUNCTION_PUBLISH_PROFILE }}
-          package: ${{ env.app_path }}/output
+          package: ${{ env.app_path }}/output3
 
       - name: 'Publish Artifact for Azure Functions'
         uses: actions/upload-artifact@v4
         with:
           name: function-artifact
-          path: ${{ env.app_path }}/output/
+          path: ${{ env.app_path }}/output3
           retention-days: 5
           overwrite: true
           compression-level: 9
@@ -114,7 +114,7 @@ jobs:
       - name: Download Artifact for Azure Functions
         uses: actions/download-artifact@v4
         with:
-          name: function-artifact.zip
+          name: function-artifact
           path: ./output
 
       - name: Verificando o download do artefato
