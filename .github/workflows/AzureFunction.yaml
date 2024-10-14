@@ -66,6 +66,11 @@ jobs:
       #          dotnet build --configuration Release --output ./output
       #          popd
 
+      - name: Zip files
+        run: |
+          cd ${{ env.app_path }}/output
+          zip -r ${{ env.app_name }}.zip .
+
       - name: 'Publish Artifact for Azure Functions'
         uses: actions/upload-artifact@v4
         with:
