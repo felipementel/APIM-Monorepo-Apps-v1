@@ -109,7 +109,7 @@ jobs:
           app-name: ${{ env.app_name }}
           slot-name: 'production'
           publish-profile: ${{ secrets.FUNCTION_PUBLISH_PROFILE }}
-          package: ./function-extracted
+          package: download
 
       - name: Log out from Azure
         run: |
