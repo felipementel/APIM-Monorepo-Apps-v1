@@ -93,7 +93,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: function-artifact
-          path: ./download
+          path: ./download/
 
       - name: Unzip
         run: |
