@@ -53,19 +53,18 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd ${{ env.app_path }}
           dotnet restore
 
       - name: Build
         run: |
           dotnet build --project ${{ env.app_full_path }} --configuration Release --output ./output --no-incremental
 
-#      - name: 'Build'
-#        shell: bash
-#        run: |
-#          pushd ${{ env.app_path }}
-#          dotnet build --configuration Release --output ./output
-#          popd
+      #      - name: 'Build'
+      #        shell: bash
+      #        run: |
+      #          pushd ${{ env.app_path }}
+      #          dotnet build --configuration Release --output ./output
+      #          popd
 
       - name: 'Publish Artifact for Azure Functions'
         uses: actions/upload-artifact@v4
