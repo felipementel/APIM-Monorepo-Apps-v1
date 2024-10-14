@@ -6,6 +6,14 @@
 https://www.youtube.com/watch?v=n6uTmKUHXyI&list=PLf7uDG4xdAJ0CzqQuYT69WzQnT5HoHAoU&ab_channel=DEPLOY
 ```
 
+Documentação oficial do Azure API Management
+
+[API Management documentation | Microsoft Learn](https://learn.microsoft.com/en-us/azure/api-management/)
+
+Problemas conhecidos que são importantes de conhecer antes de começar a usar o Azure API Management
+
+[Restrictions and details](https://learn.microsoft.com/en-us/azure/api-management/api-management-api-import-restrictions)
+
 # Criar um novo projeto
 
 ```
