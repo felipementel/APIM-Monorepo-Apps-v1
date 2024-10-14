@@ -54,6 +54,9 @@ jobs:
       - name: Install dependencies
         run: |
           dotnet restore --project ${{ env.app_full_path }}
+
+      - name: Build
+        run: |
           dotnet build --project ${{ env.app_full_path }} --configuration Release --output ./output --no-incremental
 
 #      - name: 'Build'
