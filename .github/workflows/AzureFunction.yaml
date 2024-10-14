@@ -99,8 +99,9 @@ jobs:
       - name: Unzip
         run: |
           cd download
-          unzip function-artifact.zip -d ./function-extracted
+          ls -al
 
+        #   unzip function-artifact.zip -d ./function-extracted
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1.5.2
         id: deploy-function-app
