@@ -53,7 +53,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          dotnet restore
+          dotnet restore ${{ env.app_full_path }}
 
       - name: Build
         run: |
