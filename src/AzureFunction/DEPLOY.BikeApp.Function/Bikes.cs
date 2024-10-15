@@ -17,8 +17,12 @@ namespace DEPLOY.BikeApp.Function
         [Function("bikes")]
         public IActionResult Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequest req)
         {
-            _logger.LogInformation("C# HTTP trigger function processed a request.");
-            return new OkObjectResult("Welcome to Azure Functions!");
+            if (req.Method == "GET")
+                return new OkObjectResult("GET Welcome to Azure Functions!");
+            else if (req.Method == "POST")
+                return new CreatedResult(string.Empty, "POST Welcome to Azure Functions!");
+            else
+                return new StatusCodeResult(StatusCodes.Status405MethodNotAllowed);
         }
     }
 }
